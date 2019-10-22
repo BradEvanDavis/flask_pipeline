@@ -4,7 +4,9 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
-    # Load messages dataset
+
+    '''loads messages and casts to type'''
+
     messages = pd.read_csv('messages.csv')
     messages['id'] = messages['id'].astype('int')
     categories = pd.read_csv('categories.csv')
@@ -14,6 +16,9 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+
+    '''cleans data to be used in model'''
+
     categories = df['categories'].str.split(';', expand=True)
     categories = pd.concat([cats, df['id']], axis=1)
     categories.columns = cats.iloc[0, :]
@@ -49,6 +54,8 @@ def save_data(df, database_filename):
 
 
 def main():
+    '''Executes pipeline'''
+
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]

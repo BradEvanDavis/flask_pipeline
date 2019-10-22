@@ -10,7 +10,6 @@ from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
-from ml_pipeline import StartingVerbExtractor
 
 app = Flask(__name__)
 

@@ -15,10 +15,12 @@ import pandas as pd
 from sqlalchemy import create_engine
 import joblib
 
+
 nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
 
-
 def load_data(engine):
+
+'''loads processed data for use in ML pipeline'''
 
     engine = create_engine(engine)
     df = pd.read_sql_table(con=engine, table_name='InsertTableName')
@@ -28,6 +30,8 @@ def load_data(engine):
 
 
 def tokenize(text):
+    '''tokenizes text from loaded data'''
+
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
     detected_urls = re.findall(url_regex, text)
     for url in detected_urls:
@@ -46,6 +50,9 @@ def tokenize(text):
 
 class StartingVerbExtractor(BaseEstimator, TransformerMixin):
     def starting_verb(self, text):
+
+        '''IDs verbs as this helps with categorization'''
+
         sentence_list = nltk.sent_tokenize(text)
         for sentence in sentence_list:
             pos_tags = nltk.pos_tag(tokenize(sentence))
@@ -63,6 +70,9 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
 
 
 def new_model_pipeline():
+
+    '''Defines SKLearn ML pipeline'''
+
     pipeline = Pipeline([
         ('features', FeatureUnion([
             ('text_pipeline', Pipeline([
@@ -78,6 +88,9 @@ def new_model_pipeline():
 
 
 def fit_model(X, Y, grid_search=True):
+
+    '''Fits models, grid search options True/False'''
+
     X_train, X_test, y_train, y_test = train_test_split(X, Y)
     model = new_model_pipeline()
     if grid_search == True:
@@ -102,6 +115,9 @@ def predict(model):
 
 
 def print_results(y_test, y_pred):
+
+    '''Shows results from pipeline'''
+
     y_test = pd.DataFrame(y_test)
     labels = y_test.columns
     for x in range(len(y_test.columns)):
