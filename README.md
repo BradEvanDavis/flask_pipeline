@@ -15,3 +15,5 @@ Models
 
 Example:
 python run.py
+
+![website frontpage](Screenshot from 2019-10-21 17-34-50.png)
