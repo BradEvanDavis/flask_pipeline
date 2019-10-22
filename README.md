@@ -1,4 +1,4 @@
-# flask_pipeline
+# Disaster Relief Tweet Classifier - Full ML workflow and Dashbaord Deployment
 An interactive Flask web-application and data pipeline.  This example demonstrates analyzing tweets and categorizing those communications to aid in relief during a disaster.  The web-application can be used to deploy the ML model for use in the field.
 
 # File Structure
