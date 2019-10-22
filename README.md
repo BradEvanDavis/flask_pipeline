@@ -16,4 +16,4 @@ Models
 Example:
 python run.py
 
-![website frontpage](Screenshot from 2019-10-21 17-34-50.png)
+![website frontpage](https://github.com/BradEvanDavis/flask_pipeline/blob/master/Screenshot%20from%202019-10-21%2017-34-50.png)
